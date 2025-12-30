@@ -1,0 +1,164 @@
+:root {
+    --bg-color: #f0f2f5;
+    --card-bg: #ffffff;
+    --primary-color: #4a90e2;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    width: 350px;
+    text-align: center;
+}
+
+.status-panel {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.bath-container {
+    position: relative;
+    margin-top: 60px;
+    margin-bottom: 20px;
+}
+
+.bath-frame {
+    width: 280px;
+    height: 140px;
+    border: 4px solid #333;
+    border-top: none;
+    border-radius: 0 0 40px 40px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    background: #e0e0e0;
+}
+
+.faucet-head {
+    position: absolute;
+    top: -50px;
+    left: 47px;
+    font-size: 32px;
+    color: #555;
+    z-index: 10;
+}
+
+.water-stream {
+    position: absolute;
+    top: 0;
+    left: 35px;
+    width: 12px;
+    height: 100%;
+    background-color: rgba(66, 165, 245, 0.8);
+    opacity: 0;
+    transition: opacity 0.1s;
+    z-index: 5;
+    border-radius: 0 0 10px 10px;
+}
+
+.water-stream.active {
+    opacity: 1;
+}
+
+.water {
+    width: 100%;
+    height: 0%;
+    background-color: rgba(66, 165, 245, 0.6);
+    position: absolute;
+    bottom: 0;
+    transition: height 0.5s ease-in-out;
+}
+
+.temp-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.temp-indicator {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #3498db;
+    border: 2px solid #fff;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    transition: background-color 0.5s ease;
+}
+
+.controls {
+    display: grid;
+    gap: 10px;
+}
+
+.control-group {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.btn {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
+    transition: transform 0.1s;
+}
+
+.btn:active { transform: scale(0.95); }
+
+.fill { background-color: #3498db; }
+.drain { background-color: #7f8c8d; }
+.heat { background-color: #e74c3c; }
+.cool { background-color: #9b59b6; }
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+}
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 3px; bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+input:checked + .slider { background-color: #2196F3; }
+input:checked + .slider:before { transform: translateX(20px); }
+
+.user-list-panel {
+    margin-top: 20px;
+    text-align: left;
+    font-size: 0.9em;
+    color: #666;
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Shared Bath</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>🛁 Shared Bath</h1>
+
+    <div class="status-panel">
+        <div class="info-card">
+            <span class="label">User Mode</span>
+            <label class="switch">
+                <input type="checkbox" id="modeToggle">
+                <span class="slider round"></span>
+            </label>
+            <span id="modeLabel" class="value">OFFLINE</span>
+        </div>
+        <div class="info-card">
+            <span class="label">Connected</span>
+            <span id="userCount" class="value">0</span>
+        </div>
+    </div>
+
+    <div class="bath-container">
+        <div class="faucet-head"><i class="fas fa-faucet"></i></div>
+
+        <div class="bath-frame">
+            <div id="waterStream" class="water-stream"></div>
+
+            <div id="water" class="water">
+                <div class="bubbles">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+            <div class="glass-reflection"></div>
+        </div>
+        <div class="measurements">
+            <p>Level: <span id="levelValue">0</span>%</p>
+
+            <div class="temp-wrapper">
+                <p>Temp: <span id="tempValue">0</span>°C</p>
+                <div id="tempIndicator" class="temp-indicator"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <div class="control-group water-controls">
+            <button id="btnFill" class="btn fill"><i class="fas fa-faucet"></i> FILL</button>
+            <button id="btnDrain" class="btn drain"><i class="fas fa-arrow-down"></i> DRAIN</button>
+        </div>
+        <div class="control-group temp-controls">
+            <button id="btnHeat" class="btn heat"><i class="fas fa-fire"></i> HEAT</button>
+            <button id="btnCool" class="btn cool"><i class="fas fa-snowflake"></i> COOL</button>
+        </div>
+    </div>
+
+    <div class="user-list-panel">
+        <h3>Participants</h3>
+        <ul id="userList"></ul>
+    </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
