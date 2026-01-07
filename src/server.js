@@ -25,18 +25,22 @@ let connectedUsers = new Set();
 // 2. Utility: IP Masking (XXX.XXX.*.*)
 function maskIP(ip) {
     if (!ip) return 'UNKNOWN';
-    // IPv4: Keep the first two parts and mask the rest
-    const parts = ip.replace('::ffff:', '').split('.');
-    if (parts.length >= 2) {
-        return `${parts[0]}.${parts[1]}.*.*`;
+    const cleanIp = ip.replace('::ffff:', '');
+    const parts = cleanIp.split('.');
+
+    if (parts.length === 4) {
+        // 111.222.333.444 -> 111.***.333.***
+        return `${parts[0]}.***.${parts[2]}.***`;
     }
-    return ip;
+
+    return 'Anonymous';
 }
 
 // 3. Socket Connection Handling
 io.on('connection', (socket) => {
     // Mask the IP of the connected client
-    const rawIp = socket.handshake.address;
+    const rawIp = (socket.handshake.headers['x-forwarded-for'] || socket.handshake.address).split(',')[0].trim();
+
     const maskedIp = maskIP(rawIp);
 
     console.log(`[Connect] User: ${maskedIp} (ID: ${socket.id})`);
