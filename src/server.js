@@ -36,7 +36,8 @@ function maskIP(ip) {
 // 3. Socket Connection Handling
 io.on('connection', (socket) => {
     // Mask the IP of the connected client
-    const rawIp = socket.handshake.address;
+    const rawIp = (socket.handshake.headers['x-forwarded-for'] || socket.handshake.address).split(',')[0].trim();
+
     const maskedIp = maskIP(rawIp);
 
     console.log(`[Connect] User: ${maskedIp} (ID: ${socket.id})`);
